@@ -1,0 +1,47 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+}
+
+.setup {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  border-right: 1px solid #000;
+}
+
+.screen-container {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+
+  .screen {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform-origin: top left;
+    box-sizing: border-box;
+  }
+}
+
+@media only print {
+  .setup {
+    display: none !important;
+  }
+
+  .screen {
+    transform: none !important;
+  }
+}
+
+
+@page {
+  margin: 0px;
+  padding: 0px;
+}
