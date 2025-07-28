@@ -17,6 +17,8 @@ function App() {
     marginT: 0.88,
     marginB: 0.88,
     elPadding: 0.2,
+    gapX: 0,
+    gapY: 0,
 
     prefix: "ASN-",
     offset: 1,
@@ -115,6 +117,11 @@ function App() {
         </Group>
         <Group label="Element Padding">
           <input type="number" {...field("elPadding")} step={0.05} />
+        </Group>
+        <Group label="Gap Between Tags">
+          Horizontal: <input type="number" {...field("gapX")} step={0.05} />{" "}
+          {state.unit} - Vertical:{" "}
+          <input type="number" {...field("gapY")} step={0.05} />
         </Group>
         <Group label="Calculated">
           Width:{" "}

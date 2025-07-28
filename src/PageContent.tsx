@@ -13,6 +13,8 @@ export interface PageSetup {
   marginR: number;
   marginB: number;
   marginL: number;
+  gapX: number;
+  gapY: number;
 
   elPadding: number;
 
@@ -34,6 +36,7 @@ export function PageContent(props: { page: PageSetup }) {
       style={{
         gridTemplateColumns: `repeat(${p.gridX}, 1fr)`,
         gridTemplateRows: `repeat(${p.gridY}, 1fr)`,
+        gap: `${p.gapY}${p.unit} ${p.gapX}${p.unit}`,
       }}
     >
       {p.includeInfo && (
