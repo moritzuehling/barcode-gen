@@ -1,6 +1,3 @@
-import JsBarcode from "jsbarcode";
-import React, { useLayoutEffect } from "react";
-
 export interface PageSetup {
   width: number;
   height: number;
@@ -28,7 +25,13 @@ export interface PageSetup {
 export function PageContent(props: { page: PageSetup }) {
   const p = props.page;
 
-  const entries = p.gridX * p.gridY + (p.includeInfo ? -1 : 0);
+  const entries = p.prefix
+    .split("\n")
+    .map((a) => a.trim())
+    .filter((a) => a);
+
+  const rowsToSkip = Math.floor(p.offset / p.gridX);
+  const columnsToSkip = p.offset % p.gridX;
 
   return (
     <div
@@ -39,58 +42,32 @@ export function PageContent(props: { page: PageSetup }) {
         gap: `${p.gapY}${p.unit} ${p.gapX}${p.unit}`,
       }}
     >
-      {p.includeInfo && (
+      {rowsToSkip ? (
         <div
-          className={`barcode contains-tag ${
-            p.noBorderBrint ? "no-border-print" : ""
-          }`}
+          className="skip"
+          style={{
+            gridRow: `span ${rowsToSkip}`,
+            gridColumn: `span ${p.gridX}`,
+          }}
+        />
+      ) : undefined}
+      {columnsToSkip ? (
+        <div
+          className="skip"
+          style={{
+            gridRow: `span 1`,
+            gridColumn: `span ${columnsToSkip}`,
+          }}
+        />
+      ) : undefined}
+
+      {entries.map((_, i) => (
+        <div
+          className={`barcode tag ${p.noBorderBrint ? "no-border-print" : ""}`}
         >
-          <div>{p.prefix}</div>
-          <div className="">
-            <b>{p.offset}</b>
-            {" to "}
-            <b>{p.offset + entries - 1}</b>
-          </div>
-          <div className="tc">TC: {new Date().toISOString().split("T")[0]}</div>
+          {entries[i]}
         </div>
-      )}
-      {Array(entries)
-        .fill(0)
-        .map((_, i) => (
-          <Barcode
-            key={i}
-            content={p.prefix + (p.offset + i).toString()}
-            padding={p.elPadding + p.unit}
-            className={p.noBorderBrint && "no-border-print"}
-          />
-        ))}
-    </div>
-  );
-}
-
-export function Barcode(props: {
-  content: string;
-  padding: string;
-  className?: string | false;
-}) {
-  const svg = React.useRef<SVGSVGElement>(null);
-
-  useLayoutEffect(() => {
-    if (!svg.current) {
-      return;
-    }
-
-    JsBarcode(svg.current, props.content, {
-      format: "code128",
-    });
-  }, [props.content, svg]);
-
-  return (
-    <div
-      className={`barcode ${props.className ?? ""}`}
-      style={{ padding: props.padding }}
-    >
-      <svg ref={svg} />
+      ))}
     </div>
   );
 }

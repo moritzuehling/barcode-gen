@@ -10,18 +10,32 @@ function App() {
     height: 29.7,
     unit: "cm",
     gridX: 4,
-    gridY: 11,
+    gridY: 12,
 
-    marginL: 0.8,
-    marginR: 0.8,
-    marginT: 0.88,
-    marginB: 0.88,
+    marginL: 0.985,
+    marginR: 0.985,
+    marginT: 2.13,
+    marginB: 2.13,
     elPadding: 0.2,
-    gapX: 0,
+    gapX: 0.25,
     gapY: 0,
 
-    prefix: "ASN-",
-    offset: 1,
+    prefix: `USB
+Display
+Network
+Power
+Audio
+Misc
+VR Controllers
+VR FBT
+VR Misc 1
+VR Misc 1
+Office (Writing, ...)
+Office (Paper, ...)
+Medicine
+Misc
+`,
+    offset: 14,
 
     includeInfo: true,
     noBorderBrint: true,
@@ -63,9 +77,6 @@ function App() {
     };
   }
 
-  const maxTag =
-    state.offset + state.gridX * state.gridY - 1 - (state.includeInfo ? 1 : 0);
-
   return (
     <>
       <div className="setup">
@@ -74,15 +85,7 @@ function App() {
           <input type="text" {...field("prefix")} />
         </Group>
         <Group label="Offset">
-          Labels <input type="number" {...field("offset")} step={1} /> to
-          <button
-            onClick={() => {
-              state.offset = maxTag + 1;
-            }}
-          >
-            {maxTag}
-          </button>
-          <button>{">>"}</button>
+          <input type="number" {...field("offset")} step={1} />
         </Group>
         <Group label="Archive Tag">
           <label>

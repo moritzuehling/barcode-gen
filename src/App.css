@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 .setup {
   display: flex;
@@ -7,7 +8,12 @@
   font-family: Arial, Helvetica, sans-serif;
   gap: 16px;
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     all: unset;
   }
 
@@ -26,7 +32,7 @@
     line-height: 21.5px;
   }
 
-  input[type='number'] {
+  input[type="number"] {
     flex-grow: 1;
     width: 50px;
     text-align: right;
@@ -39,12 +45,20 @@
     display: grid;
     width: 100%;
     height: 100%;
-    font-family: sans-serif;
 
     .barcode {
       overflow: hidden;
       box-sizing: border-box;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
 
+      font-family: Quicksand;
+      font-weight: 600;
+      font-size: 0.7cm;
       border: 0.25mm dotted #aaa;
 
       &.no-border-print {
