@@ -10,32 +10,22 @@ function App() {
     height: 29.7,
     unit: "cm",
     gridX: 4,
-    gridY: 12,
+    gridY: 11,
 
-    marginL: 0.985,
-    marginR: 0.985,
-    marginT: 2.13,
-    marginB: 2.13,
+    marginL: 0.8,
+    marginR: 0.8,
+    marginT: 0.9,
+    marginB: 0.9,
     elPadding: 0.2,
-    gapX: 0.25,
+    gapX: 0,
     gapY: 0,
+    fontSize: 0.7,
 
-    prefix: `USB
-Display
-Network
-Power
-Audio
-Misc
-VR Controllers
-VR FBT
-VR Misc 1
-VR Misc 1
-Office (Writing, ...)
-Office (Paper, ...)
-Medicine
-Misc
+    prefix: `label
+content
+here
 `,
-    offset: 14,
+    offset: 0,
 
     includeInfo: true,
     noBorderBrint: true,
@@ -50,7 +40,9 @@ Misc
       value: state[f],
       name: f,
       onChange: (
-        ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+        ev: React.ChangeEvent<
+          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >,
       ) => {
         const v = ev.currentTarget.value;
         switch (typeof state[f]) {
@@ -81,17 +73,11 @@ Misc
     <>
       <div className="setup">
         <h1>Archive Setup</h1>
-        <Group label="Prefix">
-          <input type="text" {...field("prefix")} />
+        <Group label="Labels">
+          <textarea {...field("prefix")} />
         </Group>
         <Group label="Offset">
           <input type="number" {...field("offset")} step={1} />
-        </Group>
-        <Group label="Archive Tag">
-          <label>
-            <input type="checkbox" {...checkbox("includeInfo")} />
-            Include Archive Tag
-          </label>
         </Group>
         <h1>Page Setup</h1>
         <Group label="Paper Size">
@@ -111,6 +97,10 @@ Misc
             <input type="checkbox" {...checkbox("noBorderBrint")} />
             Hide grid lines when printing
           </label>
+        </Group>
+        <Group label="Font Size">
+          <input type="number" {...field("fontSize")} step={0.05} />
+          {" cm"}
         </Group>
         <Group label="Margins">
           T: <input type="number" {...field("marginT")} step={0.05} />

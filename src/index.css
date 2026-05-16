@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
 }
@@ -20,7 +22,6 @@ html, body, #root {
   flex-shrink: 0;
   box-sizing: border-box;
 
-
   .screen {
     position: absolute;
     left: 0px;
@@ -38,10 +39,22 @@ html, body, #root {
   .screen {
     transform: none !important;
   }
-}
 
+  .screen-container {
+    width: initial !important;
+    height: initial !important;
+  }
+}
 
 @page {
   margin: 0px;
   padding: 0px;
+}
+
+textarea {
+  width: 100%;
+  max-width: 500px;
+  min-height: 40px;
+  field-sizing: content;
+  resize: none;
 }

@@ -12,6 +12,7 @@ export interface PageSetup {
   marginL: number;
   gapX: number;
   gapY: number;
+  fontSize: number;
 
   elPadding: number;
 
@@ -64,6 +65,7 @@ export function PageContent(props: { page: PageSetup }) {
       {entries.map((_, i) => (
         <div
           className={`barcode tag ${p.noBorderBrint ? "no-border-print" : ""}`}
+          style={{ fontSize: `${p.fontSize}cm` }}
         >
           {entries[i]}
         </div>
