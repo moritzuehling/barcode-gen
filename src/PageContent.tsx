@@ -24,12 +24,6 @@ export interface PageSetup {
 
 export function PageContent(props: { page: PageSetup }) {
   const p = props.page;
-
-  const entries = p.prefix
-    .split("\n")
-    .map((a) => a.trim())
-    .filter((a) => a);
-
   const rowsToSkip = Math.floor(p.offset / p.gridX);
   const columnsToSkip = p.offset % p.gridX;
 
@@ -61,13 +55,38 @@ export function PageContent(props: { page: PageSetup }) {
         />
       ) : undefined}
 
-      {entries.map((_, i) => (
-        <div
-          className={`barcode tag ${p.noBorderBrint ? "no-border-print" : ""}`}
-        >
-          {entries[i]}
-        </div>
-      ))}
+      <USBLabel f={["pd", "dp"]}>C-C</USBLabel>
+      <USBLabel f={["pd", "dp"]}>C-C</USBLabel>
+      <USBLabel f={["pd", "dp"]}>C-C</USBLabel>
+      <USBLabel f={["pd"]}>C-C</USBLabel>
+      <USBLabel f={["pd"]}>C-C</USBLabel>
+      <USBLabel f={[]}>C/A-C</USBLabel>
+      <USBLabel f={["3.0"]}>C-A</USBLabel>
+      <USBLabel f={["3.0"]}>C-A</USBLabel>
+      <USBLabel f={[]}>C-A</USBLabel>
+      <USBLabel f={[]}>C-A</USBLabel>
+      <USBLabel f={[]}>µB-A</USBLabel>
+      <USBLabel f={[]}>µB-A</USBLabel>
+      <USBLabel f={[]}>µB-A</USBLabel>
+      <USBLabel f={[]}>µB-A</USBLabel>
+    </div>
+  );
+}
+
+function USBLabel(props: { children: string; f?: string[] }) {
+  const [from, to] = props.children.split("-");
+  return (
+    <div className={`barcode tag no-border-print`}>
+      <div className="rotated">
+        {from}-{to}
+        {(props.f?.length ?? 0) > 0 && (
+          <div className="rtag">
+            {props.f?.map((a) => (
+              <span>{a}</span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

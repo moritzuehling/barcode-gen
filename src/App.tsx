@@ -20,22 +20,8 @@ function App() {
     gapX: 0.25,
     gapY: 0,
 
-    prefix: `USB
-Display
-Network
-Power
-Audio
-Misc
-VR Controllers
-VR FBT
-VR Misc 1
-VR Misc 1
-Office (Writing, ...)
-Office (Paper, ...)
-Medicine
-Misc
-`,
-    offset: 14,
+    prefix: `C-C`,
+    offset: 1,
 
     includeInfo: true,
     noBorderBrint: true,
@@ -50,7 +36,7 @@ Misc
       value: state[f],
       name: f,
       onChange: (
-        ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+        ev: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
       ) => {
         const v = ev.currentTarget.value;
         switch (typeof state[f]) {
